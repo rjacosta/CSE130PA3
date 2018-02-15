@@ -78,9 +78,10 @@ interpBinOp Times = (*)
 -- arithmetic expression and evaluates it to an integer. 
 
 interp :: Expr -> Int
--- <FILL-IN>
-interp = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+interp (Lit x) = x
+interp (Op Plus e1 e2) = (interp e1) + (interp e2)
+interp (Op Minus e1 e2) = (interp e1) - (interp e2)
+interp (Op Times e1 e2) = (interp e1) * (interp e2) 
 
 -- You might like to use interpBinOp; also, feel free to change the top-level
 -- declaration as you like, e.g. to add pattern matching on arguments.
