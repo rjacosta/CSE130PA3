@@ -200,8 +200,15 @@ type Stack = [Int]
 -- does this.
 
 step :: Instr -> Stack -> Maybe Stack
--- <FILL-IN>
-step = question "[8 pts] COMPLETE THE DEFINITION"
+-- <FILL-IN> --
+step (IOp Plus) [] = Nothing
+step (IOp Plus) [x] = Nothing
+step (IOp Plus) ls = maybe ls
+--step (IOp Plus) ls = [(ls !! 0) + (ls !! 1)]
+--step (IOp Minus) ls =
+--step (IOp Times) ls =
+
+-- question "[8 pts] COMPLETE THE DEFINITION"
 -- </FILL-IN>
 
 -- We should also tie this together, and write a function that
