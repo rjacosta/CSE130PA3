@@ -113,7 +113,9 @@ interp (Op Times e1 e2) = (interp e1) * (interp e2)
 
 simplifyZero :: Expr -> Expr
 -- <FILL-IN>
-simplifyZero = question "[7 pts] COMPLETE THE DEFINITION"
+simplifyZero (Op Plus (Lit 0) e) = e 
+simplifyZero (Op Plus e (Lit 0)) = e  
+-- "[7 pts] COMPLETE THE DEFINITION"
 -- </FILL-IN>
 
 -- You have probably been testing your programs correctness by running them
