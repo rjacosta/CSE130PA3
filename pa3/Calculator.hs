@@ -112,11 +112,8 @@ interp (Op Times e1 e2) = (interp e1) * (interp e2)
 -- simplifyZero that ONLY optimizes additions by zero is acceptable.
 
 simplifyZero :: Expr -> Expr
--- <FILL-IN>
 simplifyZero (Op Plus (Lit 0) e) = e 
 simplifyZero (Op Plus e (Lit 0)) = e  
--- "[7 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
 
 -- You have probably been testing your programs correctness by running them
 -- on simple examples.
@@ -148,9 +145,10 @@ simplifyZero (Op Plus e (Lit 0)) = e
 -- is an optimizer which looks at all sub-expressions.
 
 peephole :: (Expr -> Expr) -> Expr -> Expr
--- <FILL-IN>
-peephole = question "[8 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+peephole optimizer (Lit x) = Lit x
+peephole optimizer (Op Plus (Lit x) (Lit y)) = optimizer (Op Plus (Lit x) (Lit y))
+peephole optimizer (Op Plus (Lit x) e) = Op Plus (Lit x) (peephole optimizer e)
+peephole optimizer (Op Plus e (Lit x)) = Op Plus (peephole optimizer e) (Lit x)
 
 -------------------------------------------------------------------
 
