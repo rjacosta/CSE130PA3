@@ -201,16 +201,12 @@ type Stack = [Int]
 
 step :: Instr -> Stack -> Maybe Stack
 -- <FILL-IN> --
+step (IPush x) ls = Just $ [x] ++ ls
 step i [] = Nothing
---step (IOp Minus) [] = Nothing
---step (IOp Times) [] = Nothing
 step i [x] = Nothing
---step (IOp Minus) [x] = Nothing
---step (IOp Times) [x] = Nothing
 step (IOp Plus) ls = Just $ [(ls !! 0) + (ls !! 1)] ++ (drop 2 ls)
 step (IOp Minus) ls = Just $ [(ls !! 0) - (ls !! 1)] ++ (drop 2 ls)
 step (IOp Times) ls = Just $ [(ls !! 0) * (ls !! 1)] ++ (drop 2 ls)
-step (IPush x) ls = Just [x] ++ ls
 -- question "[8 pts] COMPLETE THE DEFINITION"
 -- </FILL-IN>
 
