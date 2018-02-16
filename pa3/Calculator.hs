@@ -202,9 +202,12 @@ type Stack = [Int]
 step :: Instr -> Stack -> Maybe Stack
 -- <FILL-IN> --
 step (IOp Plus) [] = Nothing
+step (IOp Minus) [] = Nothing
+step (IOp Times) [] = Nothing
 step (IOp Plus) [x] = Nothing
-step (IOp Plus) ls = maybe ls
---step (IOp Plus) ls = [(ls !! 0) + (ls !! 1)]
+step (IOp Minus) [x] = Nothing
+step (IOp Times) [x] = Nothing
+step (IOp Plus) ls = Just [(ls !! 0) + (ls !! 1)]
 --step (IOp Minus) ls =
 --step (IOp Times) ls =
 
