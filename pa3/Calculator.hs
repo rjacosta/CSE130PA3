@@ -79,9 +79,7 @@ interpBinOp Times = (*)
 
 interp :: Expr -> Int
 interp (Lit x) = x
-interp (Op Plus e1 e2) = (interp e1) + (interp e2)
-interp (Op Minus e1 e2) = (interp e1) - (interp e2)
-interp (Op Times e1 e2) = (interp e1) * (interp e2) 
+interp (Op b e1 e2) = interpBinOp b (interp e1) (interp e2)
 
 -- You might like to use interpBinOp; also, feel free to change the top-level
 -- declaration as you like, e.g. to add pattern matching on arguments.
@@ -200,15 +198,10 @@ type Stack = [Int]
 -- does this.
 
 step :: Instr -> Stack -> Maybe Stack
--- <FILL-IN> --
-step (IPush x) ls = Just $ [x] ++ ls
+step (IPush x) st = Just $ [x] ++ st
 step i [] = Nothing
 step i [x] = Nothing
-step (IOp Plus) ls = Just $ [(ls !! 0) + (ls !! 1)] ++ (drop 2 ls)
-step (IOp Minus) ls = Just $ [(ls !! 0) - (ls !! 1)] ++ (drop 2 ls)
-step (IOp Times) ls = Just $ [(ls !! 0) * (ls !! 1)] ++ (drop 2 ls)
--- question "[8 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+step (IOp b) st = Just $ [interpBinOp b (st !! 0) (st !! 1)] ++ (drop 2 st)
 
 -- We should also tie this together, and write a function that
 -- takes a stream of instructions and an initial stack, and executes
@@ -217,9 +210,7 @@ step (IOp Times) ls = Just $ [(ls !! 0) * (ls !! 1)] ++ (drop 2 ls)
 -- Hint: Look up what foldM is and try to use it
 
 run :: [Instr] -> Stack -> Maybe Stack
--- <FILL-IN>
-run = question "[12 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+run is st = foldM (\x f -> step f x) st is 
 
 -------------------------------------------------------------------
 
@@ -238,9 +229,8 @@ run = question "[12 pts] COMPLETE THE DEFINITION"
 -- two lines.)
 
 compile :: Expr -> [Instr]
--- <FILL-IN>
-compile = question "[10 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+compile (Lit a) = [IPush a]
+compile (Op b e1 e2) = compile e2 ++ compile e1 ++ [IOp b] 
 
 -- Your compiler is correct if running the instructions produced
 -- by the compiler on an empty stack gives you the same result as
