@@ -113,10 +113,8 @@ simplifyZero :: Expr -> Expr
 simplifyZero (Op Plus (Lit 0) e) = e 
 simplifyZero (Op Plus e (Lit 0)) = e  
 simplifyZero (Lit x) = Lit x
-simplifyZero (Op Plus e (Lit p)) = (Op Plus e (Lit p))
-simplifyZero (Op Plus (Lit p) e) = (Op Plus (Lit p) e)
-simplifyZero (Op Plus e1 e2) = Op Plus e1 e2
 simplifyZero (Op b e1 e2) = Op b e1 e2
+
 -- You have probably been testing your programs correctness by running them
 -- on simple examples.
 --
@@ -148,10 +146,7 @@ simplifyZero (Op b e1 e2) = Op b e1 e2
 
 peephole :: (Expr -> Expr) -> Expr -> Expr
 peephole optimizer (Lit x) = Lit x
-peephole optimizer (Op b (Lit x) (Lit y)) = optimizer (Op b (Lit x) (Lit y))
-peephole optimizer (Op b (Lit x) e) = Op b (Lit x) (peephole optimizer e)
-peephole optimizer (Op b e (Lit x)) = Op b (peephole optimizer e) (Lit x)
-peephole optimizer (Op b e1 e2) = Op b (peephole optimizer e1) (peephole optimizer e2)
+peephole optimizer (Op b e1 e2) = optimizer (Op b (peephole optimizer e1) (peephole optimizer e2))
 
 -------------------------------------------------------------------
 
