@@ -55,9 +55,7 @@ exIntList = [2,3,1]
 -- Translate this to dictionary passing style.
 
 exSortInt :: [Int]
--- <FILL-IN>
-exSortInt = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+exSortInt = (sort dOrdInt) exIntList 
 
 -- Pairs (a, b) also have an Ord instance. It looks like this:
 --
@@ -71,9 +69,11 @@ exSortInt = question "[5 pts] COMPLETE THE DEFINITION"
 -- Please translate this instance into a dictionary.
 
 dOrdXY :: Ord a -> Ord b -> Ord (a, b)
--- <FILL-IN>
-dOrdXY = question "[7 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+dOrdXY aDict bDict = MkOrd compare where 
+	compare (a1,b1) (a2,b2) = 
+		case compare aDict a1 a2 of 
+			EQ -> compare bDict b1 b2 
+			r -> r 
 
 -- Here's a list of pairs of Ints:
 
@@ -88,7 +88,8 @@ exIntPairList = [(2,1), (1,2)]
 
 exSortIntPair :: [(Int, Int)]
 -- <FILL-IN>
-exSortIntPair = question "[5 pts] COMPLETE THE DEFINITION"
+--exSortIntPair = (sort dOrdXY) exIntPairList
+exSortIntPair = question "No Clue"
 -- </FILL-IN>
 
 -- The previous ordering instance we gave is a bit arbitrary;
