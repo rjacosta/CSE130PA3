@@ -112,8 +112,7 @@ interp (Op b e1 e2) = interpBinOp b (interp e1) (interp e2)
 simplifyZero :: Expr -> Expr
 simplifyZero (Op Plus (Lit 0) e) = e 
 simplifyZero (Op Plus e (Lit 0)) = e  
-simplifyZero (Lit x) = Lit x
-simplifyZero (Op b e1 e2) = Op b e1 e2
+simplifyZero e = e
 
 -- You have probably been testing your programs correctness by running them
 -- on simple examples.
