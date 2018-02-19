@@ -69,11 +69,11 @@ exSortInt = (sort dOrdInt) exIntList
 -- Please translate this instance into a dictionary.
 
 dOrdXY :: Ord a -> Ord b -> Ord (a, b)
-dOrdXY aDict bDict = MkOrd compare where 
-	compare (a1,b1) (a2,b2) = 
-		case compare aDict a1 a2 of 
-			EQ -> compare bDict b1 b2 
-			r -> r 
+dOrdXY aDict bDict = MkOrd compare where
+      compare (a1, b1) (a2, b2) =
+          case compare aDict a1 a2 of
+              EQ -> compare bDict b1 b2
+              r -> r
 
 -- Here's a list of pairs of Ints:
 
@@ -88,8 +88,7 @@ exIntPairList = [(2,1), (1,2)]
 
 exSortIntPair :: [(Int, Int)]
 -- <FILL-IN>
---exSortIntPair = (sort dOrdXY) exIntPairList
-exSortIntPair = question "No Clue"
+exSortIntPair = (sort (dOrdXY dOrdInt dOrdInt)) exIntPairList
 -- </FILL-IN>
 
 -- The previous ordering instance we gave is a bit arbitrary;
@@ -98,9 +97,11 @@ exSortIntPair = question "No Clue"
 -- very similar to dOrdXY):
 
 dOrdYX :: Ord a -> Ord b -> Ord (a, b)
--- <FILL-IN>
-dOrdYX = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+dOrdYX aDict bDict = MkOrd compare where
+      compare (a1, b1) (a2, b2) =
+          case compare bDict b1 b2 of
+              EQ -> compare aDict a1 a2
+              r -> r
 
 -- With type-classes, it is not possible to define both of these
 -- instances simultaneously.  We can see why if we look at some code
