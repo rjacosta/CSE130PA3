@@ -76,7 +76,7 @@ dOrdXY aDict bDict = MkOrd {
         case compare aDict a1 a2 of
             EQ -> compare bDict b1 b2
             r -> r
-
+--dOrdXY = question "Hey"
 -- Here's a list of pairs of Ints:
 
 exIntPairList :: [(Int, Int)]
