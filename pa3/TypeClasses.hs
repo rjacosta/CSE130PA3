@@ -143,9 +143,7 @@ dOrdIntDesc = MkOrd $ \x y -> Prelude.compare y x
 -- this into dictionary passing style (it should look very familiar!):
 
 exSortIntDesc :: [Int]
--- <FILL-IN>
-exSortIntDesc = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+exSortIntDesc = (sort dOrdIntDesc) exIntList
 
 -- Local instance declarations don't have any effect on runtime,
 -- besides influencing what DICTIONARY is chosen to be filled in.
