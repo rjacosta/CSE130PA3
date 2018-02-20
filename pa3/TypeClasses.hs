@@ -55,9 +55,7 @@ exIntList = [2,3,1]
 -- Translate this to dictionary passing style.
 
 exSortInt :: [Int]
--- <FILL-IN>
-exSortInt = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+exSortInt = (sort dOrdInt) exIntList 
 
 -- Pairs (a, b) also have an Ord instance. It looks like this:
 --
@@ -71,10 +69,12 @@ exSortInt = question "[5 pts] COMPLETE THE DEFINITION"
 -- Please translate this instance into a dictionary.
 
 dOrdXY :: Ord a -> Ord b -> Ord (a, b)
--- <FILL-IN>
-dOrdXY = question "[7 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
-
+dOrdXY aDict bDict = MkOrd where 
+    compare (a1,b1) (a2,b2) =
+        case compare aDict a1 a2 of
+            EQ -> compare bDict b1 b2
+            r -> r
+--dOrdXY = question "Hey"
 -- Here's a list of pairs of Ints:
 
 exIntPairList :: [(Int, Int)]
@@ -88,7 +88,8 @@ exIntPairList = [(2,1), (1,2)]
 
 exSortIntPair :: [(Int, Int)]
 -- <FILL-IN>
-exSortIntPair = question "[5 pts] COMPLETE THE DEFINITION"
+--exSortIntPair = (sort (dOrdXY dOrdInt dOrdInt)) exIntPairList
+exSortIntPair = question "Hey"
 -- </FILL-IN>
 
 -- The previous ordering instance we gave is a bit arbitrary;
@@ -97,9 +98,12 @@ exSortIntPair = question "[5 pts] COMPLETE THE DEFINITION"
 -- very similar to dOrdXY):
 
 dOrdYX :: Ord a -> Ord b -> Ord (a, b)
--- <FILL-IN>
-dOrdYX = question "[5 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+dOrdYX = question "Working"
+--dOrdYX aDict bDict = MkOrd compare where
+--      compare (a1, b1) (a2, b2) =
+--          case compare bDict b1 b2 of
+--              EQ -> compare aDict a1 a2
+--              r -> r
 
 -- With type-classes, it is not possible to define both of these
 -- instances simultaneously.  We can see why if we look at some code

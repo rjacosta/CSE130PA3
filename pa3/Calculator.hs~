@@ -209,7 +209,14 @@ step (IOp b) st = Just $ [interpBinOp b (st !! 0) (st !! 1)] ++ (drop 2 st)
 -- Hint: Look up what foldM is and try to use it
 
 run :: [Instr] -> Stack -> Maybe Stack
+<<<<<<< HEAD
+-- <FILL-IN>
+run [] ls = Just ls
+ 
+-- </FILL-IN>
+=======
 run is st = foldM (\x f -> step f x) st is 
+>>>>>>> 1dff1a85333a54fe5461f233277b8833fc70ef09
 
 -------------------------------------------------------------------
 
