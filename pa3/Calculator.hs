@@ -198,9 +198,9 @@ type Stack = [Int]
 
 step :: Instr -> Stack -> Maybe Stack
 step (IPush x) st = Just $ [x] ++ st
-step i [] = Nothing
-step i [x] = Nothing
-step (IOp b) st = Just $ [interpBinOp b (st !! 0) (st !! 1)] ++ (drop 2 st)
+step _ [] = Nothing
+step _ [_] = Nothing
+step (IOp b) st = Just $ [interpBinOp b (st !! 1) (st !! 0)] ++ (drop 2 st)
 
 -- We should also tie this together, and write a function that
 -- takes a stream of instructions and an initial stack, and executes
@@ -229,7 +229,7 @@ run is st = foldM (\x f -> step f x) st is
 
 compile :: Expr -> [Instr]
 compile (Lit a) = [IPush a]
-compile (Op b e1 e2) = compile e2 ++ compile e1 ++ [IOp b] 
+compile (Op b e1 e2) = compile e1 ++ compile e2 ++ [IOp b] 
 
 -- Your compiler is correct if running the instructions produced
 -- by the compiler on an empty stack gives you the same result as
