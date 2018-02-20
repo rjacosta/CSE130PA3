@@ -163,9 +163,7 @@ exSortIntDesc = (sort dOrdIntDesc) exIntList
 
 -- BEGIN sortIntDesc (DO NOT DELETE THIS LINE)
 sortIntDesc :: [Int] -> [Int]
--- <FILL-IN>
-sortIntDesc = question "[8 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+sortIntDesc ls = (sort dOrdIntDesc) ls 
 
 -- However, local instances can give rise to some odd behavior.  This is
 -- precisely why Haskell doesn't have them. For example, here is another
@@ -184,10 +182,8 @@ sortIntDesc = question "[8 pts] COMPLETE THE DEFINITION"
 -- Remember that class constraints get translated into dictionary
 -- arguments.)
 
--- <FILL-IN>
--- sortIntDesc' :: ???
-sortIntDesc' x = question "[7 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+sortIntDesc' :: Ord a -> [a] -> [a]
+sortIntDesc' xs = sort xs
 
 -- In fact, with local instances, we lose "principal types", an
 -- observation that was first made in Wadler and Blott.  The chosen
@@ -210,10 +206,13 @@ sortIntDesc' x = question "[7 pts] COMPLETE THE DEFINITION"
 --
 -- Convert this function to dictionary passing style.
 
--- <FILL-IN>
--- isSorted :: ???
-isSorted = question "[8 pts] COMPLETE THE DEFINITION"
--- </FILL-IN>
+isSorted :: Ord a -> [a] -> Bool 
+isSorted _ [] = True
+isSorted _ [_] = True
+isSorted aDict (x:x':xs) = 
+    case compare aDict x x' of 
+        GT -> False 
+        _ -> isSorted aDict (x':xs)
 
 -- Helper pedantic function (ignore)
 question = error
