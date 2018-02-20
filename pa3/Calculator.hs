@@ -218,7 +218,8 @@ step (IOp Times) ls = Just $ [(ls !! 0) * (ls !! 1)] ++ (drop 2 ls)
 
 run :: [Instr] -> Stack -> Maybe Stack
 -- <FILL-IN>
-run = question "[12 pts] COMPLETE THE DEFINITION"
+run [] ls = Just ls
+ 
 -- </FILL-IN>
 
 -------------------------------------------------------------------
